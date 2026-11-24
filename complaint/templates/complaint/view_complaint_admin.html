@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>View Complaints | Water Quality System</title>
+
+	<style>
+		/* Body styling */
+		body {
+			background: linear-gradient(to bottom right, #b3e5fc, #4dd0e1, #0288d1);
+			font-family: 'Poppins', sans-serif;
+			margin: 0;
+			padding: 60px 20px 20px 20px;
+			color: #004d40;
+			position: relative;
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		/* Subtle water ripple effect */
+		body::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: url('https://www.transparenttextures.com/patterns/water.png');
+			opacity: 0.15;
+			animation: moveWater 30s linear infinite;
+			z-index: 0;
+		}
+
+		@keyframes moveWater {
+			from { background-position: 0 0; }
+			to { background-position: 1000px 1000px; }
+		}
+
+		/* Back Home Button */
+		.home-button {
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			background: linear-gradient(135deg, #e0f7fa, #80deea);
+			color: #004d40;
+			padding: 10px 20px;
+			text-decoration: none;
+			border-radius: 8px;
+			font-weight: 600;
+			box-shadow: 0 4px 10px rgba(0, 150, 200, 0.3);
+			backdrop-filter: blur(8px);
+			transition: all 0.3s ease;
+			z-index: 2;
+		}
+
+		.home-button:hover {
+			background: linear-gradient(135deg, #4dd0e1, #00acc1);
+			color: white;
+			box-shadow: 0 6px 16px rgba(0, 200, 255, 0.5);
+			transform: scale(1.05);
+		}
+
+		/* Container styling */
+		center {
+			display: block;
+			margin: 0 auto;
+			max-width: 900px;
+			padding: 30px;
+			background: rgba(255, 255, 255, 0.25);
+			border-radius: 14px;
+			box-shadow: 0 8px 25px rgba(0, 100, 150, 0.3);
+			backdrop-filter: blur(10px);
+			position: relative;
+			z-index: 1;
+		}
+
+		h1 {
+			color: #004d80;
+			font-weight: 700;
+			margin-bottom: 25px;
+			text-shadow: 0 0 8px rgba(0, 150, 255, 0.4);
+			letter-spacing: 1px;
+		}
+
+		/* Table design */
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			background-color: rgba(255, 255, 255, 0.8);
+			box-shadow: 0 0 12px rgba(0, 150, 200, 0.3);
+			border-radius: 10px;
+			overflow: hidden;
+		}
+
+		th, td {
+			padding: 12px 15px;
+			text-align: center;
+			border-bottom: 2px solid rgba(0, 77, 64, 0.2);
+			font-size: 1rem;
+			font-weight: 500;
+		}
+
+		th {
+			background: linear-gradient(135deg, #0288d1, #00acc1);
+			color: white;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		tr:nth-child(even) {
+			background-color: rgba(178, 235, 242, 0.8);
+		}
+
+		tr:hover {
+			background-color: rgba(128, 222, 234, 0.8);
+			transition: background-color 0.3s ease;
+		}
+
+		/* Link styling */
+		a {
+			color: #004d40;
+			font-weight: 600;
+			text-decoration: none;
+			background: linear-gradient(135deg, #80deea, #4dd0e1);
+			padding: 6px 12px;
+			border-radius: 6px;
+			transition: all 0.3s ease;
+			box-shadow: 0 2px 5px rgba(0, 77, 64, 0.2);
+			display: inline-block;
+		}
+
+		a:hover {
+			background: linear-gradient(135deg, #00bcd4, #0097a7);
+			color: white;
+			transform: scale(1.05);
+			box-shadow: 0 4px 10px rgba(0, 150, 200, 0.4);
+		}
+
+		@media (max-width: 600px) {
+			.home-button {
+				left: 10px;
+				top: 10px;
+				padding: 8px 14px;
+				font-size: 14px;
+			}
+			center {
+				width: 95%;
+				padding: 20px;
+			}
+			th, td {
+				font-size: 0.9rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Back Home Button -->
+	<a href="/temp/admin/" class="home-button">← Back Home</a>
+
+	<center>
+		<h1>View Complaints</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Complaint</th>
+					<th>Reply</th>
+					<th>User ID</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in comp %}
+				<tr>
+					<td>{{ i.complaint }}</td>
+					<td>{{ i.replay }}</td>
+					<td>{{ i.user_id }}</td>
+					<td><a href="/complaint/re_admin/{{ i.complaint_id }}">Reply</a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</center>
+
+</body>
+</html>

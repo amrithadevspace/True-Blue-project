@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login</title>
+	<style>
+		/* 🌊 Background Styling */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: linear-gradient(135deg, #00bcd4, #00796b);
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			position: relative;
+		}
+
+		/* 💧 Water Drop Effects */
+		body::before, body::after {
+			content: "";
+			position: absolute;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.2);
+			filter: blur(2px);
+			z-index: 0;
+			animation: float 10s infinite ease-in-out alternate;
+		}
+
+		body::before {
+			width: 180px;
+			height: 180px;
+			top: 10%;
+			left: 20%;
+			animation-delay: 0s;
+		}
+
+		body::after {
+			width: 250px;
+			height: 250px;
+			bottom: 15%;
+			right: 15%;
+			background: rgba(255, 255, 255, 0.1);
+			animation-delay: 3s;
+		}
+
+		/* Additional small drops */
+		.drop {
+			position: absolute;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.12);
+			filter: blur(1px);
+			z-index: 0;
+			animation: float 12s infinite ease-in-out alternate;
+		}
+
+		.drop:nth-child(1) { width: 60px; height: 60px; top: 25%; left: 10%; animation-delay: 1s; }
+		.drop:nth-child(2) { width: 100px; height: 100px; bottom: 20%; left: 30%; animation-delay: 2s; }
+		.drop:nth-child(3) { width: 50px; height: 50px; top: 15%; right: 25%; animation-delay: 4s; }
+		.drop:nth-child(4) { width: 70px; height: 70px; bottom: 30%; right: 10%; animation-delay: 5s; }
+
+		@keyframes float {
+			0% { transform: translateY(0px) scale(1); }
+			100% { transform: translateY(-30px) scale(1.05); }
+		}
+
+		/* 🩵 Glassmorphic Login Box */
+		.login-container {
+			position: relative;
+			z-index: 1;
+			background: rgba(255, 255, 255, 0.15);
+			backdrop-filter: blur(12px);
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			border-radius: 15px;
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+			padding: 40px 50px;
+			width: 350px;
+			text-align: center;
+			color: #ffffff;
+		}
+
+		h3 {
+			margin-bottom: 30px;
+			font-size: 28px;
+			font-weight: bold;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			color: #ffffff;
+			text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+		}
+
+		table {
+			width: 100%;
+			margin: auto;
+		}
+
+		td {
+			padding: 10px;
+			font-size: 15px;
+			color: #e0f7fa;
+		}
+
+		input[type="text"],
+		input[type="password"] {
+			width: 90%;
+			padding: 10px;
+			border: none;
+			border-radius: 8px;
+			font-size: 15px;
+			outline: none;
+			color: #004d40;
+			background-color: #ffffff;
+			box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
+			transition: box-shadow 0.3s ease, transform 0.2s ease;
+		}
+
+		input[type="text"]:focus,
+		input[type="password"]:focus {
+			box-shadow: 0 0 8px #00e5ff;
+			transform: scale(1.03);
+		}
+
+		input[type="submit"] {
+			width: 100%;
+			padding: 12px;
+			margin-top: 20px;
+			background: linear-gradient(135deg, #00bcd4, #004d40);
+			color: white;
+			border: none;
+			border-radius: 8px;
+			font-size: 16px;
+			font-weight: bold;
+			cursor: pointer;
+			text-transform: uppercase;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+			transition: background 0.3s ease, transform 0.2s ease;
+		}
+
+		input[type="submit"]:hover {
+			background: linear-gradient(135deg, #26c6da, #00695c);
+			transform: translateY(-2px);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+		}
+
+		/* ⬅️ Back Home Button */
+		.back-home {
+			position: absolute;
+			top: 20px;
+			left: 25px;
+			background: linear-gradient(135deg, #00bcd4, #00796b);
+			color: white;
+			padding: 10px 18px;
+			border-radius: 10px;
+			font-weight: 600;
+			text-decoration: none;
+			box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+			transition: 0.3s;
+			z-index: 3;
+		}
+		.back-home:hover {
+			background: linear-gradient(135deg, #26c6da, #004d40);
+			transform: scale(1.05);
+			box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
+		}
+
+		/* 💧 Register link style */
+		.register-link {
+			margin-top: 18px;
+			font-size: 15px;
+			color: #ffffff;
+			text-align: center;
+			font-weight: 500;
+		}
+
+		.register-link a {
+			color: #00ffff;
+			text-decoration: none;
+			font-weight: 700;
+			text-shadow: 0 0 10px rgba(0, 255, 255, 0.9), 0 0 20px rgba(0, 255, 255, 0.6);
+			transition: all 0.3s ease-in-out;
+		}
+
+		.register-link a:hover {
+			color: #ffffff;
+			text-shadow: 0 0 15px #00e5ff, 0 0 30px #00bcd4, 0 0 45px #00acc1;
+		}
+
+		/* 💠 Responsive */
+		@media (max-width: 480px) {
+			.login-container {
+				width: 85%;
+				padding: 25px;
+			}
+			h3 {
+				font-size: 22px;
+			}
+			.back-home {
+				padding: 8px 14px;
+				font-size: 13px;
+			}
+		}
+        .alert-box{
+	background: rgba(255, 0, 0, 0.2);
+	color: #fff;
+	padding: 10px;
+	border-radius: 8px;
+	margin-bottom: 15px;
+	font-size: 14px;
+	text-align: center;
+	border: 1px solid rgba(255,255,255,0.3);
+}
+	</style>
+</head>
+<body>
+
+	<!-- 💧 Decorative water drops -->
+	<div class="drop"></div>
+	<div class="drop"></div>
+	<div class="drop"></div>
+	<div class="drop"></div>
+
+	<!-- ⬅️ Back Home Button -->
+	<a href="/" class="back-home">← Back to Home</a>
+
+	<form method="post">
+         {% csrf_token %}
+       {% if msg %}
+<div class="alert-box">
+    {{ msg }}
+</div>
+{% endif %}
+		<div class="login-container">
+			<h3>Login</h3>
+
+			<table>
+				<tr>
+					<td>Username:</td>
+					<td><input type="text" name="username" required></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" name="password" required></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="Login">
+					</td>
+				</tr>
+			</table>
+
+			<!-- 🌟 Register Link -->
+			<p class="register-link">
+				Don’t have an account?
+				<a href="/user/user_register/">Register as user</a><br>
+                <a href="/technician/technecian_register/">Register as technician</a>
+			</p>
+		</div>
+	</form>
+
+</body>
+</html>

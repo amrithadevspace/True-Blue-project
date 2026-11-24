@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Water Quality Complaint - TRUE BLUE</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* WATER BACKGROUND */
+
+body{
+margin:0;
+font-family:'Roboto',sans-serif;
+background: linear-gradient(135deg,#0077b6,#00b4d8,#90e0ef);
+background-attachment: fixed;
+color:#023e8a;
+}
+
+/* BUBBLE EFFECT */
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-image:
+radial-gradient(circle at 20% 30%, rgba(255,255,255,0.25) 3px, transparent 4px),
+radial-gradient(circle at 70% 60%, rgba(255,255,255,0.25) 3px, transparent 4px),
+radial-gradient(circle at 40% 80%, rgba(255,255,255,0.25) 3px, transparent 4px);
+background-size:200px 200px;
+z-index:-1;
+}
+
+/* BACK BUTTON */
+
+.home-button{
+
+position:absolute;
+
+top:20px;
+
+right:30px;
+
+background:#0077b6;
+
+color:white;
+
+padding:10px 18px;
+
+border-radius:25px;
+
+text-decoration:none;
+
+font-weight:bold;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+
+transition:0.3s;
+
+}
+
+.home-button:hover{
+
+background:#023e8a;
+
+transform:scale(1.05);
+
+}
+
+/* FORM CARD */
+
+.container{
+
+width:430px;
+
+margin:120px auto;
+
+padding:35px;
+
+background:rgba(255,255,255,0.15);
+
+backdrop-filter:blur(12px);
+
+border-radius:15px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+
+}
+
+/* TITLE */
+
+h2{
+
+text-align:center;
+
+margin-top:0;
+
+color:#023e8a;
+
+letter-spacing:1px;
+
+}
+
+/* LABEL */
+
+label{
+
+font-weight:bold;
+
+}
+
+/* TEXTAREA */
+
+textarea{
+
+width:100%;
+
+border-radius:10px;
+
+border:none;
+
+padding:14px;
+
+font-size:14px;
+
+background:rgba(255,255,255,0.85);
+
+box-shadow:inset 0 2px 6px rgba(0,0,0,0.1);
+
+resize:vertical;
+
+}
+
+/* BUTTON */
+
+.submit-button{
+
+display:block;
+
+margin:25px auto;
+
+padding:12px 35px;
+
+background:#0077b6;
+
+color:white;
+
+border:none;
+
+border-radius:30px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+font-size:15px;
+
+transition:0.3s;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.25);
+
+}
+
+.submit-button:hover{
+
+background:#023e8a;
+
+transform:scale(1.05);
+
+}
+
+/* MOBILE */
+
+@media (max-width:480px){
+
+.container{
+
+width:90%;
+
+margin-top:90px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<a href="/temp/user/" class="home-button">← Back Home</a>
+
+<form method="post">
+
+{% csrf_token %}
+
+<div class="container">
+
+<h2>Water Quality Complaint Form</h2>
+
+<table width="100%">
+
+<tr>
+
+<td><label for="complaint">Describe your issue:</label></td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<textarea name="complaint" id="complaint" rows="8" placeholder="Please describe the water quality issue..." required></textarea>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<input type="submit" value="Submit Complaint" class="submit-button">
+
+</form>
+
+</body>
+</html>

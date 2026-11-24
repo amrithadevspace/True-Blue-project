@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Water Quality Data Search</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+
+*{
+box-sizing:border-box;
+}
+
+body{
+
+margin:0;
+font-family:'Roboto',sans-serif;
+
+background: linear-gradient(135deg,#0077b6,#00b4d8,#90e0ef);
+background-attachment: fixed;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+min-height:100vh;
+padding-top:90px;
+
+color:#023e8a;
+
+}
+
+/* BUBBLE EFFECT */
+
+body::before{
+
+content:"";
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background-image:
+radial-gradient(circle at 20% 30%, rgba(255,255,255,0.25) 3px, transparent 4px),
+radial-gradient(circle at 70% 60%, rgba(255,255,255,0.25) 3px, transparent 4px),
+radial-gradient(circle at 40% 80%, rgba(255,255,255,0.25) 3px, transparent 4px);
+
+background-size:200px 200px;
+
+z-index:-1;
+
+}
+
+/* BACK BUTTON */
+
+.back-btn{
+
+position:absolute;
+top:20px;
+left:25px;
+
+text-decoration:none;
+
+background:#0077b6;
+
+color:white;
+
+padding:10px 22px;
+
+border-radius:25px;
+
+font-weight:bold;
+
+box-shadow:0 6px 15px rgba(0,0,0,0.3);
+
+transition:0.3s;
+
+}
+
+.back-btn:hover{
+
+background:#023e8a;
+transform:scale(1.05);
+
+}
+
+/* SEARCH BOX */
+
+form{
+
+background:rgba(255,255,255,0.2);
+
+padding:25px 40px;
+
+border-radius:15px;
+
+backdrop-filter:blur(12px);
+
+box-shadow:0 10px 25px rgba(0,0,0,0.25);
+
+display:flex;
+
+gap:15px;
+
+margin-bottom:40px;
+
+}
+
+/* INPUT */
+
+input[type="text"]{
+
+padding:12px 14px;
+
+border:none;
+
+border-radius:8px;
+
+font-size:16px;
+
+width:230px;
+
+outline:none;
+
+}
+
+input[type="text"]:focus{
+
+box-shadow:0 0 8px #00b4d8;
+
+}
+
+/* BUTTON */
+
+input[type="submit"]{
+
+background:#00b4d8;
+
+color:white;
+
+padding:12px 25px;
+
+border:none;
+
+border-radius:8px;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+input[type="submit"]:hover{
+
+background:#0077b6;
+transform:scale(1.05);
+
+}
+
+/* TABLE */
+
+table{
+
+border-collapse:collapse;
+
+width:60%;
+
+min-width:420px;
+
+text-align:center;
+
+background:rgba(255,255,255,0.9);
+
+border-radius:15px;
+
+overflow:hidden;
+
+box-shadow:0 12px 30px rgba(0,0,0,0.3);
+
+}
+
+/* CAPTION */
+
+caption{
+
+caption-side:top;
+
+font-size:22px;
+
+font-weight:bold;
+
+padding:15px;
+
+color:#023e8a;
+
+}
+
+/* HEADERS */
+
+th{
+
+background:#0077b6;
+
+color:white;
+
+padding:14px;
+
+font-size:17px;
+
+}
+
+/* CELLS */
+
+td{
+
+padding:14px;
+
+font-size:16px;
+
+border-bottom:1px solid rgba(0,0,0,0.1);
+
+}
+
+/* ROW HOVER */
+
+tr:hover{
+
+background:#caf0f8;
+
+}
+
+/* MOBILE */
+
+@media (max-width:600px){
+
+table{
+width:90%;
+}
+
+form{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+input[type="text"]{
+
+width:100%;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<a href="/temp/user/" class="back-btn">← Back Home</a>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<input type="text" name="lop" placeholder="Enter place to search">
+
+<input type="submit" value="Search">
+
+</form>
+
+<table>
+
+<caption>Nearby Water Quality Data</caption>
+
+<tr>
+
+<th>Place</th>
+<th>PH</th>
+
+</tr>
+
+{% for i in nn %}
+
+<tr>
+
+<td>{{ i.place }}</td>
+<td>{{ i.ph }}</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="2">No results found.</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

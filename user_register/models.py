@@ -1,0 +1,16 @@
+
+# Create your models here.
+from django.db import models
+class User(models.Model):
+    user_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=45)
+    last_name = models.CharField(max_length=45)
+    email_id = models.CharField(max_length=45)
+    phon_no = models.CharField(max_length=45)
+    user_name = models.CharField(max_length=45)
+    password = models.CharField(max_length=45)
+    # status = models.CharField(max_length=45)
+
+    class Meta:
+
+        db_table = 'user'

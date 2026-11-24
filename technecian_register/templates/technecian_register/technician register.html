@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Technician Register</title>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: 'Raleway', sans-serif;
+			color: #e0f7ff;
+			background: linear-gradient(180deg, #b3ecff 0%, #5bd0ff 40%, #0077b6 100%);
+			overflow: hidden;
+			position: relative;
+		}
+
+		/* Subtle moving texture */
+		body::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: url('https://www.transparenttextures.com/patterns/water.png');
+			opacity: 0.25;
+			animation: waterMove 22s linear infinite;
+		}
+		@keyframes waterMove {
+			from { background-position: 0 0; }
+			to { background-position: 1000px 1000px; }
+		}
+
+		/* Glass form */
+		form {
+			position: relative;
+			z-index: 2;
+			width: 380px;
+			padding: 35px 40px;
+			border-radius: 20px;
+			background: rgba(255, 255, 255, 0.15);
+			backdrop-filter: blur(20px) saturate(180%);
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			box-shadow: 0 0 25px rgba(0, 200, 255, 0.35),
+			            inset 0 0 15px rgba(255, 255, 255, 0.1);
+			animation: fadeIn 1.2s ease-out;
+		}
+
+		@keyframes fadeIn {
+			from { opacity: 0; transform: translateY(25px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		h2 {
+			text-align: center;
+			font-size: 26px;
+			margin-bottom: 25px;
+			color: #004f73;
+			font-family: 'Poppins', sans-serif;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 1.5px;
+			text-shadow: 0 0 12px rgba(0, 230, 255, 0.7);
+		}
+
+		table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 10px;
+		}
+
+		td:first-child {
+			width: 40%;
+			padding-right: 10px;
+			color: #00425a;
+			font-family: 'Poppins', sans-serif;
+			font-weight: 600;
+			font-size: 14px;
+			text-shadow: 0 0 4px rgba(0, 180, 255, 0.25);
+			text-transform: capitalize;
+		}
+
+		input, select {
+			width: 100%;
+			padding: 9px;
+			border-radius: 10px;
+			border: 1px solid rgba(0, 160, 220, 0.4);
+			background: rgba(255, 255, 255, 0.45);
+			color: #00384d;
+			font-size: 14px;
+			font-weight: 600;
+			font-family: 'Raleway', sans-serif;
+			outline: none;
+			transition: all 0.3s ease;
+		}
+
+		input:focus, select:focus {
+			background: rgba(0, 170, 255, 0.25);
+			border-color: rgba(0, 200, 255, 0.8);
+			box-shadow: 0 0 15px rgba(0, 200, 255, 0.6);
+			transform: scale(1.02);
+		}
+
+		input[type="submit"] {
+			margin-top: 20px;
+			background: linear-gradient(135deg, #00c8ff, #0066a6);
+			border: none;
+			cursor: pointer;
+			font-weight: 700;
+			font-family: 'Poppins', sans-serif;
+			color: white;
+			font-size: 15px;
+			letter-spacing: 0.8px;
+			text-transform: uppercase;
+			border-radius: 10px;
+			box-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+			transition: all 0.3s ease;
+			padding: 10px;
+		}
+
+		input[type="submit"]:hover {
+			background: linear-gradient(135deg, #00e0ff, #004f73);
+			box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+			transform: scale(1.05);
+		}
+
+		/* Floating water bubbles */
+		.bubble {
+			position: absolute;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.25);
+			box-shadow: 0 0 20px rgba(0, 200, 255, 0.3);
+			animation: rise 12s infinite ease-in;
+			backdrop-filter: blur(8px);
+		}
+		@keyframes rise {
+			from { transform: translateY(100vh) scale(0.6); opacity: 0.6; }
+			to { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+		}
+		.bubble:nth-child(1) { width: 60px; height: 60px; left: 12%; animation-delay: 0s; }
+		.bubble:nth-child(2) { width: 40px; height: 40px; left: 38%; animation-delay: 3s; }
+		.bubble:nth-child(3) { width: 70px; height: 70px; left: 65%; animation-delay: 5s; }
+		.bubble:nth-child(4) { width: 55px; height: 55px; left: 80%; animation-delay: 7s; }
+
+		/* Back Home Button */
+		.back-home {
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			background: rgba(255, 255, 255, 0.2);
+			border: 1px solid rgba(255, 255, 255, 0.4);
+			backdrop-filter: blur(10px);
+			color: #004b66;
+			font-weight: 600;
+			font-family: 'Poppins', sans-serif;
+			text-decoration: none;
+			padding: 10px 25px;
+			border-radius: 10px;
+			box-shadow: 0 0 12px rgba(0, 200, 255, 0.4);
+			transition: all 0.3s ease;
+			z-index: 3;
+		}
+		.back-home:hover {
+			background: rgba(0, 210, 255, 0.5);
+			color: white;
+			box-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+			transform: scale(1.05);
+		}
+
+		@media (max-width: 480px) {
+			form { width: 90%; padding: 25px; }
+			h2 { font-size: 22px; }
+			td:first-child { font-size: 13px; }
+			.back-home { top: 15px; left: 10px; padding: 8px 18px; font-size: 14px; }
+		}
+	</style>
+</head>
+<body>
+
+	<!-- Floating bubbles -->
+	<div class="bubble"></div>
+	<div class="bubble"></div>
+	<div class="bubble"></div>
+	<div class="bubble"></div>
+
+	<!-- ✅ Fixed Back Home Button -->
+	<a href="/temp/home/" class="back-home">← Back Home</a>
+
+	<form method="post">
+        {% csrf_token %}
+		<h2>Technician Register</h2>
+		<table>
+			<tr>
+				<td>First Name:</td>
+				<td><input type="text" name="FirstName" placeholder="Enter First Name" required></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td><input type="text" name="Lastname" placeholder="Enter Last Name" required></td>
+			</tr>
+			<tr>
+				<td>Email ID:</td>
+				<td><input type="email" name="emailid" placeholder="Enter Email" required></td>
+			</tr>
+			<tr>
+				<td>Phone No:</td>
+				<td><input type="tel" name="phoneno"
+               pattern="[6-9][0-9]{9}"
+               maxlength="10"
+               placeholder="Enter 10-digit number"
+               required>
+</td>
+			</tr>
+			<tr>
+				<td>Username:</td>
+				<td><input type="text" name="username" placeholder="Choose Username" required></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="password" name="password"
+               pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}"
+               title="Password must contain at least 8 characters, including uppercase, lowercase, number, and special character."
+               required></td>
+			</tr>
+			<tr>
+				<td>Qualification:</td>
+				<td>
+					<select name="qualification" required>
+						<option value="">Select</option>
+						<option value="BSc.EnvironmentalScience">BSc Environmental Science</option>
+						<option value="BSc.Chemistry">BSc Chemistry</option>
+						<option value="BSc.Biology">BSc Biology</option>
+						<option value="Environmental Engineering">Environmental Engineering</option>
+						<option value="Chemical Engineering">Chemical Engineering</option>
+						<option value="Other">Other</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Register"></td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>

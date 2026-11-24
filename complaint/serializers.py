@@ -1,0 +1,8 @@
+from complaint.models import  Complaint
+from rest_framework import serializers
+
+
+class android_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Complaint
+        fields = '__all__'

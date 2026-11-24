@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Reply to Complaint</title>
+	<style>
+		body {
+			background: linear-gradient(135deg, #b3e5fc, #4dd0e1, #0288d1);
+			margin: 0;
+			font-family: 'Poppins', sans-serif;
+			color: #004d40;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		/* Subtle moving water texture */
+		body::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: url('https://www.transparenttextures.com/patterns/water.png');
+			opacity: 0.15;
+			animation: moveWater 30s linear infinite;
+			z-index: 0;
+		}
+		@keyframes moveWater {
+			from { background-position: 0 0; }
+			to { background-position: 1000px 1000px; }
+		}
+
+		/* Back Home Button */
+		.home-button {
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			background: linear-gradient(135deg, #e0f7fa, #80deea);
+			color: #004d40;
+			padding: 10px 22px;
+			text-decoration: none;
+			border-radius: 10px;
+			font-weight: 600;
+			box-shadow: 0 4px 12px rgba(0, 150, 200, 0.4);
+			backdrop-filter: blur(10px);
+			transition: all 0.3s ease;
+			z-index: 2;
+			font-size: 15px;
+			letter-spacing: 0.3px;
+		}
+
+		.home-button:hover {
+			background: linear-gradient(135deg, #4dd0e1, #00acc1);
+			color: white;
+			box-shadow: 0 8px 18px rgba(0, 200, 255, 0.6);
+			transform: scale(1.05);
+			text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+		}
+
+		.container {
+			position: relative;
+			z-index: 1;
+			width: 420px;
+			padding: 30px;
+			background: rgba(255, 255, 255, 0.25);
+			backdrop-filter: blur(12px);
+			border-radius: 16px;
+			box-shadow: 0 8px 25px rgba(0, 100, 150, 0.3);
+			text-align: center;
+		}
+
+		h2 {
+			margin-top: 0;
+			color: #004d80;
+			font-weight: 700;
+			text-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+			letter-spacing: 0.5px;
+		}
+
+		table {
+			width: 100%;
+			color: #004d40;
+			margin-top: 15px;
+		}
+
+		td {
+			padding: 8px 0;
+		}
+
+		label {
+			font-weight: 600;
+			font-size: 15px;
+			color: #003c5f;
+		}
+
+		textarea {
+			width: 100%;
+			height: 120px;
+			border-radius: 10px;
+			border: 1px solid rgba(0, 180, 255, 0.4);
+			padding: 12px;
+			resize: vertical;
+			font-size: 14px;
+			font-family: inherit;
+			box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+			background-color: rgba(255, 255, 255, 0.8);
+			transition: 0.3s;
+		}
+
+		textarea:focus {
+			outline: none;
+			border-color: #00bcd4;
+			box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+		}
+
+		/* Submit button — ACTIVE & interactive */
+		.submit-button {
+			display: block;
+			margin: 30px auto 0 auto;
+			padding: 14px 42px;
+			background: linear-gradient(135deg, #0288d1, #00acc1);
+			color: #ffffff;
+			border: none;
+			border-radius: 10px;
+			font-weight: 700;
+			cursor: pointer;
+			font-size: 17px;
+			letter-spacing: 0.5px;
+			box-shadow: 0 6px 20px rgba(0, 150, 200, 0.5);
+			position: relative;
+			overflow: hidden;
+			transition: all 0.3s ease;
+		}
+
+		.submit-button:hover {
+			background: linear-gradient(135deg, #00bcd4, #0097a7);
+			transform: scale(1.07);
+			box-shadow: 0 10px 25px rgba(0, 200, 255, 0.6);
+			text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+		}
+
+		.submit-button:focus {
+			outline: none;
+			box-shadow: 0 0 15px rgba(0, 200, 255, 0.6);
+		}
+
+		/* Water ripple animation on click */
+		.submit-button::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 0;
+			height: 0;
+			background: rgba(255, 255, 255, 0.6);
+			border-radius: 50%;
+			transform: translate(-50%, -50%);
+			opacity: 0;
+			transition: width 0.6s ease, height 0.6s ease, opacity 0.8s ease;
+		}
+
+		.submit-button:active::after {
+			width: 250px;
+			height: 250px;
+			opacity: 0;
+			transition: 0s;
+		}
+
+		@media (max-width: 480px) {
+			.container {
+				width: 90%;
+				padding: 20px;
+			}
+			.home-button {
+				left: 10px;
+				top: 10px;
+				padding: 8px 14px;
+				font-size: 14px;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<!-- Back Home Button -->
+	<a href="/complaint/view/" class="home-button">← Back </a>
+
+	<form method="POST">
+		{% csrf_token %}
+		<div class="container">
+			<h2>Reply to Complaint</h2>
+			<table>
+				<tr>
+					<td><label for="reply">Your Reply:</label></td>
+				</tr>
+				<tr>
+					<td><textarea name="reply" id="reply" placeholder="Write your response to the user's complaint..." required></textarea></td>
+				</tr>
+			</table>
+		</div>
+
+		<!-- Submit button with ripple and glow -->
+		<input type="submit" value="Send Reply" class="submit-button">
+	</form>
+
+</body>
+</html>
